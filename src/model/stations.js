@@ -51,8 +51,8 @@ export default class Stations {
     // 존재여부 확인
     return this._stationSet.delete(stationName);
   }
+
+  // 로컬 스토리지에서 데이터 들고오기 -> constructor 내부에서 수행되도록
+
 }
 
-
-
-new Stations();
