@@ -3,7 +3,8 @@ export default class Stations {
 
   constructor() {
     // 현재까지 추가한 역 리스트 저장
-    this._stationSet = new Set([]);
+    // this._stationSet = new Set([]);
+    this._stationSet = new Set(['노포', '범어사', '장전', '부산대']);
   }
 
   // 역 리스트 조회하기

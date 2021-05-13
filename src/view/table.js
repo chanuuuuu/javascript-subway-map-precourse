@@ -1,24 +1,65 @@
-// 테이블을 구현하는 뷰
-// let element = document.createElement(tag);
+import makeTag from './tag.js';
 
-// 동적으로 구현하기 위해서는 반드시 style을 태그에 적용행햐ㅏㅁ
-// 반드시 헤더 - data의 shape가 동일해야함
-const makeTable = (header, data) => {
-  let element = document.createElement('table');
-  element.id = 'data-table';
-  element.style='border: 1px solid black;';
-  
-  let tableHeader = document.createElement('tr');
-  for (const head of header) {
-    let tableCell = document.createElement('th');
-    tableCell.style='border: 1px solid black;';
-    tableCell.innerHTML = 
-      `<div style="font-weight: bold; border: 1px solid black;">${head}</div>`;
-    tableHeader.appendChild(tableCell);
+class Table {
+
+  constructor() {
+    this._element =  null;
   }
-  element.appendChild(tableHeader);
 
-  return element;
-};
+  makeTable(header, rowData) {
+    this.element = makeTag({
+      "id" : 'data-table',
+      "tag" : 'table',
+      'style': 'border: 1px solid black;'
+    });
 
-export default makeTable;
+    // headerList
+    const headerTags = this.makeHeader(header);
+    this.makeRow(headerTags); 
+
+    // rowList
+    rowData.forEach((row)=> this.makeRow(row));
+
+    return this.element;
+  }
+
+  makeRow(rowData) {
+    const row = makeTag({ 
+      'tag' : 'tr',
+      'id' : rowData.id
+     });
+    
+    for (const element of rowData.cell) {
+      const cell = makeTag({ 
+        'tag' : 'th',
+        'style': 'border: 1px solid black;'
+       });
+      cell.appendChild(element);
+      row.appendChild(cell);
+    }
+
+    this.element.appendChild(row);
+  }
+
+  deleteRow(rowId) {
+    const row = document.querySelector(`#${rowId}`);
+    row.parentNode.removeChild(row);
+  }
+
+  // 헤더리스트를 태그로 만드는 작업
+  makeHeader(headerList) {
+    const headerElements = headerList.map((header)=> makeTag({
+      'tag' : 'div',
+      'text': header,
+      'style' : "font-weight: bold;"
+    }))
+
+    return {
+      'id' : 'table-header',
+      'cell': headerElements
+    }
+  }
+ 
+}
+
+export default  Table;
