@@ -20,6 +20,10 @@ const makeTag = (tagData) => {
     element.id = tagData.id;
   }
 
+  if ('class' in tagData) {
+    element.className = tagData.class;
+  }
+
   return element;
 }
 

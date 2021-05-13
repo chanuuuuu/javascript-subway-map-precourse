@@ -3,7 +3,7 @@ import makeTag from './tag.js';
 class Table {
 
   constructor() {
-    this._element =  null;
+    this.element =  null;
   }
 
   makeTable(header, rowData) {
@@ -28,7 +28,6 @@ class Table {
       'tag' : 'tr',
       'id' : rowData.id
      });
-    
     for (const element of rowData.cell) {
       const cell = makeTag({ 
         'tag' : 'th',
@@ -37,8 +36,9 @@ class Table {
       cell.appendChild(element);
       row.appendChild(cell);
     }
-
     this.element.appendChild(row);
+
+    return row;
   }
 
   deleteRow(station) {
