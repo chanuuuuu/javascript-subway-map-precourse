@@ -19,7 +19,7 @@ export default class StationController {
 
     // 역관리 버튼 클릭시 이벤트 연걸
     this._menuButton.addEventListener('click', () => this.manageStation());
-
+    
     // 테이블 뷰 생성
     this.tableView = new Table();
 
@@ -27,8 +27,27 @@ export default class StationController {
     this.inputView = new StationInput();
   }
 
+  // 리렌더링 방지
+  checkPageType() {
+    const htmlTag = document.querySelector('html');
+    if (htmlTag.dataset.pageType === 'station') {
+      return true;
+    } 
+    else {
+      htmlTag.dataset.pageType = 'station';
+      return false;
+    }
+
+  }
+
   // 역 관리 버튼 클릭시
   manageStation() {
+
+    // 현재 페이지가 역인지 확인 html 태그의 data-page
+    if (this.checkPageType()){
+      return;
+    }
+
     // 역 리스트 조회
     const stations = this._stationList.select();
     // 테이블 데이터 생성
@@ -58,8 +77,10 @@ export default class StationController {
   // 역 삭제 핸들러
   deleteStation(event) {
     const station = event.target.id;
+    // 역 모델 업데이트
     const deleteResult = this._stationList.pop(station);
     if (deleteResult) {
+      // 역 테이블 뷰 업데이트
       this.tableView.deleteRow(station);
     }else {
       alert('유효하지 않는 클릭입니다.');
@@ -71,6 +92,7 @@ export default class StationController {
     insertButton.addEventListener('click', ()=> this.insertStation());
   }
 
+  // 역 추가 핸들러
   insertStation() {
     const input = document.querySelector(`#${STATION_INPUT_ID}`);
     const stationName = input.value;
