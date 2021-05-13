@@ -47,13 +47,13 @@ export default class StationController {
 
   // 역 삭제 핸들러
   deleteStation(event) {
-    console.log(event.target.id);
-
-    // 모델 갱신
-
-    // view갱신
-    tableView.deleteRow();
-
+    const station = event.target.id;
+    const deleteResult = this._stationList.pop(station);
+    if (deleteResult) {
+      this.tableView.deleteRow(station);
+    }else {
+      alert('유효하지 않는 클릭입니다.');
+    }
   }
 
   // 테이블로 전달하기 위한 데이터 전처리
@@ -68,9 +68,9 @@ export default class StationController {
             'tag': 'div',
           }),
           makeTag({
+            'id': `${station}`,
             'text': '삭제',
             'tag': 'button',
-            'style': 'border: 1px solid black;'
           })
         ]
       }

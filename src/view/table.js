@@ -41,8 +41,8 @@ class Table {
     this.element.appendChild(row);
   }
 
-  deleteRow(rowId) {
-    const row = document.querySelector(`#${rowId}`);
+  deleteRow(station) {
+    const row = document.querySelector(`#${station}-row`);
     row.parentNode.removeChild(row);
   }
 
