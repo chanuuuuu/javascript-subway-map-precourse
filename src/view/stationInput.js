@@ -1,6 +1,6 @@
 
 import { STATION_INPUT_ID, STATION_INPUT_BUTTON_ID } from '../shared.js';
-import makeTag from './tag.js';
+import { makeTag, insertTag } from './tag.js';
 
 export default class StationInput {
   
@@ -28,30 +28,27 @@ export default class StationInput {
   }
 
   insertTitleTag(parent) {
-    const title = makeTag({
+    insertTag(parent, {
       "tag" : 'div',
       'text': '역 이름',
       'style': 'font-weight: 700;'
     })
-    parent.appendChild(title);
   }
 
   insertInputTag(parent) {
-    const input = makeTag({
+    insertTag(parent, {
       'tag' : 'input',
       'id' : STATION_INPUT_ID
     })
-    parent.appendChild(input);
   }
 
   insertButtonTag(parent) {
-    const button = makeTag({
+    insertTag(parent, {
       'tag': 'button',
       'text' : '역 추가',
       'id' : STATION_INPUT_BUTTON_ID,
       'style': 'font-size: 15px;'
     })
-    parent.appendChild(button);
   }
 
 }

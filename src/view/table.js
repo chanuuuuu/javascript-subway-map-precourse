@@ -1,4 +1,4 @@
-import makeTag from './tag.js';
+import { makeTag } from './tag.js';
 
 class Table {
 

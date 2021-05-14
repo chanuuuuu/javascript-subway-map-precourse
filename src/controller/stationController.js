@@ -1,7 +1,9 @@
-import Stations from '../model/stations.js';
+import stations from '../model/stations.js';
 import StationInput from '../view/stationInput.js';
 import Table  from '../view/table.js';
-import makeTag from '../view/tag.js';
+import MainView from '../view/main.js';
+
+import { makeTag } from '../view/tag.js';
 import { STATION_INPUT_ID, STATION_INPUT_BUTTON_ID, STATION_DLETE_BUTTON_CLASS } from '../shared.js';
 
 // 역 관련 이벤트를 담당하는 컨트롤러 구현
@@ -9,13 +11,10 @@ export default class StationController {
 
   constructor() {
     // 역 리스트 생성
-    this._stationList = new Stations();
+    this._stationList = stations;
 
     // 역 관리 버튼 태그
     this._menuButton = document.querySelector('#station-manager-button');
-
-    // 역 관리 내용 태그
-    this._mainArea = document.querySelector('#main');
 
     // 역관리 버튼 클릭시 이벤트 연걸
     this._menuButton.addEventListener('click', () => this.manageStation());
@@ -25,26 +24,16 @@ export default class StationController {
 
     // 인풋 뷰 생성
     this.inputView = new StationInput();
-  }
 
-  // 리렌더링 방지
-  checkPageType() {
-    const htmlTag = document.querySelector('html');
-    if (htmlTag.dataset.pageType === 'station') {
-      return true;
-    } 
-    else {
-      htmlTag.dataset.pageType = 'station';
-      return false;
-    }
-
+    // 메인 뷰 생성
+    this.mainView = new MainView();
   }
 
   // 역 관리 버튼 클릭시
   manageStation() {
 
     // 현재 페이지가 역인지 확인 html 태그의 data-page
-    if (this.checkPageType()){
+    if (this.mainView.checkPageType('station')){
       return;
     }
 
@@ -58,8 +47,8 @@ export default class StationController {
     const table = this.tableView.makeTable(['역 이름', '설정'], rowData);
 
     // 태그 추가
-    this._mainArea.appendChild(input);
-    this._mainArea.appendChild(table);
+    this.mainView.insert(input);
+    this.mainView.insert(table);
 
     // 역 삭제 이벤트 추가
     this.appendDeleteEvent();

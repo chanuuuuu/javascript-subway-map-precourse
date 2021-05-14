@@ -1,9 +1,10 @@
 
-export default class Stations {
+class Stations {
 
   constructor() {
-    // 현재까지 추가한 역 리스트 저장
     // this._stationSet = new Set([]);
+    
+    // localStroage에서 데이터 존재 확인 후 존재시 데이터 로드
     this._stationSet = new Set(['노포', '범어사', '장전', '부산대']);
   }
 
@@ -57,3 +58,6 @@ export default class Stations {
 
 }
 
+const stations = new Stations();
+
+export default  stations;

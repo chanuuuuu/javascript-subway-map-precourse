@@ -27,4 +27,12 @@ const makeTag = (tagData) => {
   return element;
 }
 
-export default makeTag;
+const insertTag = (parent, tagData) => {
+  const tag = makeTag(tagData)
+  parent.appendChild(tag);
+}
+
+export {
+  makeTag,
+  insertTag
+};
