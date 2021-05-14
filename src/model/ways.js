@@ -1,7 +1,7 @@
-class Ways {
+class Lines {
 
   constructor() {
-    this._wayList = [
+    this._lineList = [
       {
         'name' : '1호선',
         'start' : '금호',
@@ -12,19 +12,19 @@ class Ways {
 
   // 노선 리스트 조회하기
   select() {
-    const wayList = this._wayList.map((x) => [
+    const lineList = this._lineList.map((x) => [
       x.name, x.start, x.end
     ]) 
-    return wayList;
+    return lineList;
   }
 
   // 노선 리스트 추가하기
   append() {  
-    const names = this._wayList.map((x) => x.name);
+    const names = this._lineList.map((x) => x.name);
     console.log(names);
   }
 
 }
 
 
-const way = new Ways();
+const line = new Lines();

@@ -1,5 +1,5 @@
 // main tag를 관리하는 뷰
-export default class MainView {
+class MainView {
   constructor(){
     this.htmlTag = document.querySelector('html');
     this.element = document.querySelector('#main');
@@ -28,3 +28,8 @@ export default class MainView {
     this.element.appendChild(tag);
   }
 }
+
+
+const mainView = new MainView();
+
+export default mainView;

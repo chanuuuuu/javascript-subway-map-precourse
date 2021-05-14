@@ -1,10 +1,10 @@
 import stations from '../model/stations.js';
 import StationInput from '../view/stationInput.js';
 import Table  from '../view/table.js';
-import MainView from '../view/main.js';
+import mainView from '../view/main.js';
 
 import { makeTag } from '../view/tag.js';
-import { STATION_INPUT_ID, STATION_INPUT_BUTTON_ID, STATION_DLETE_BUTTON_CLASS } from '../shared.js';
+import { STATION_INPUT_ID, STATION_INPUT_BUTTON_ID, STATION_DLETE_BUTTON_CLASS, STATION_MANAGE_BUTTION_ID } from '../shared.js';
 
 // 역 관련 이벤트를 담당하는 컨트롤러 구현
 export default class StationController {
@@ -14,7 +14,7 @@ export default class StationController {
     this._stationList = stations;
 
     // 역 관리 버튼 태그
-    this._menuButton = document.querySelector('#station-manager-button');
+    this._menuButton = document.querySelector(`#${STATION_MANAGE_BUTTION_ID}`);
 
     // 역관리 버튼 클릭시 이벤트 연걸
     this._menuButton.addEventListener('click', () => this.manageStation());
@@ -26,7 +26,7 @@ export default class StationController {
     this.inputView = new StationInput();
 
     // 메인 뷰 생성
-    this.mainView = new MainView();
+    this.mainView = mainView;
   }
 
   // 역 관리 버튼 클릭시
